@@ -1,0 +1,19 @@
+Quines comandes heu utilitzat per crear la partició, donar format al sistema de
+fitxers, muntar la partició i canviar els permisos del directori backup?
+
+Quina modificació és necessària fer perquè aquesta nova partició es munti
+automàticament durant el boot amb mode de només lectura?
+
+Com es pot fer perquè el nom del fitxer de backup inclogui automàticament la data  del backup?
+Per  exemple  que  sigui   backup-etc-nivell0-200712041030 (any mes dia hora minut segon).
+Utilitza la comanda date.
+
+Quina comanda heu fet servir per fer la còpia completa del directori /etc?
+
+Per què no és aconsellable comprimir el fitxer de backup?
+
+Si volguéssim comprimir el fitxer de backup quina opció afegiriem a la comanda tar?
+
+Quina opció de tar permet excloure un llistat de fitxers del backup? 
+
+Com heu utilitzat la comanda md5sum per produir la signatura md5?
