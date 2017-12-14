@@ -23,22 +23,46 @@ backup.sh
 
   FOLDER=$1
   TYPE="TOTAL"
-  LEVEL="0"
+  LEVEL=$2
   DATE=`date +%Y_%m_%d_%H_%M_%S`
   # Replacing the '/'s of the folder name
   FOLDERNAME="${FOLDER//\//-}"
   NAME=$DATE\_$FOLDERNAME\_$TYPE\_$LEVEL
-  tar -cvpzf "/backup/$NAME.tar.gz" $FOLDER
+  tar -cvpf "/backup/$NAME.tar" $FOLDER
 
 Quina comanda heu fet servir per fer la còpia completa del directori /etc?
 
+./backup.sh /etc/ 0
+
 Per què no és aconsellable comprimir el fitxer de backup?
+
+    Perquè no es guanya res, ja que la majoria de fitxers són petits i tect pla, que no tenen molta possibilitat de ser comprimits.
 
 Si volguéssim comprimir el fitxer de backup quina opció afegiriem a la comanda tar?
 
+    tar -cvpzf "/backup/$NAME.tar.gz" $FOLDER
+
 Quina opció de tar permet excloure un llistat de fitxers del backup?
 
+    --exclude-from=excludes
+
 Com heu utilitzat la comanda md5sum per produir la signatura md5?
+
+    md5sum /backup/$NAME.tar | awk '{print $1}' > /backup/$NAME.asc
+
+Quina comanda heu utilitzat per fer la còpia incremental?
+
+    sudo tar --newer=/backup/2017_12_14_15_35_47_-root-_TOTAL_0.tar -cvpf /backup/$NAME.tar /root
+
+Quin problema potencial hi ha al utilitzar el fitxer .tar de la còpia completa per
+obtenir la data del backup per fer la còpia incremental? Com es pot resoldre
+aquest problema?
+  Que llavors cada cop que fem una còpia incremental copiarem els fitxers modificats
+  des de la data en que vam fer la còpia TOTAL.
+  Per a solucionar-ho, després de fer una còpia incremental, fem "touch <nom_copia_TOTAL>",
+  així només gafarem per a les incrementals els fitxers modificats després de la última còpia incremental.
+
+tar --compare --file=archive-file.tar
 
 NOTES
 
